@@ -9,7 +9,7 @@ let bankLoan = 0;
 bankBalanceElement.innerText = bankBalance + "kr";
 loanElement.innerText = bankLoan + "kr";
 
-const getLoan = () => {
+const takeLoan = () => {
   const desiredLoan = prompt(
     "Please fill in the desired amount you wish to loan"
   );
@@ -45,7 +45,7 @@ const getLoan = () => {
     alert(`${desiredLoan} is not a valid numeric digit`);
   }
 };
-getLoanButton.addEventListener("click", getLoan);
+getLoanButton.addEventListener("click", takeLoan);
 
 const repayLoan = (sum) => {
   //pay back the loan
@@ -63,4 +63,28 @@ const repayLoan = (sum) => {
   }
   bankBalanceElement.innerText = bankBalance + "kr";
   loanElement.innerText = bankLoan + "kr";
+};
+
+const deposit = (amount) => {
+  bankBalance += parseInt(amount);
+  bankBalanceElement.innerText = bankBalance  + "kr";
+};
+
+const withdraw = (amount) => {
+  deposit(-amount);
+};
+const getBalance = () => {
+  return bankBalance;
+};
+const getLoan = () => {
+  return bankLoan;
+};
+
+export const bankMod = {
+  takeLoan,
+  repayLoan,
+  deposit,
+  withdraw,
+  getBalance,
+  getLoan,
 };

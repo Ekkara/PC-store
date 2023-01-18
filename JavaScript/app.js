@@ -1,4 +1,4 @@
-//import all modules, capsulating could be better...
-import * as bank from "./bank.js";
-import * as store from "./store.js";
-import * as work from "./work.js";
+//import all module
+import {bankMod} from "./bank.js";
+import {storeMod} from "./store.js";
+import {workMod} from "./work.js";

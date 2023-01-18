@@ -91,9 +91,10 @@ const attemptToBuy = () => {
   const PC = laptops[laptopsElement.value - 1];
 
   //see if user can afford the PC, display different prompt accordingly
-  if (bankBalance >= PC.price) {
-    bankBalance -= PC.price;
-    bankBalanceElement.innerText = bankBalance + "kr";
+  if (bankMod.getBalance() >= PC.price) {
+    /*bankBalance -= PC.price;
+    bankBalanceElement.innerText = bankBalance + "kr";*/
+    bankMod.withdraw(PC.price)
 
     alert(
       `Congratulations on your purchase! you are now a proud owner of ${PC.title}!`
@@ -101,9 +102,15 @@ const attemptToBuy = () => {
   } else {
     alert(
       `insufficient funds, you currently lack ${
-        PC.price - bankBalance
+        PC.price - bankMod.getBalance()
       } to purchase this PC!`
     );
   }
 };
 buyButton.addEventListener("click", attemptToBuy);
+
+export const storeMod = {
+  attemptToBuy,
+  updateStoreView,
+  handlePCMenuChange
+}

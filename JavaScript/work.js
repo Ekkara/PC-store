@@ -17,7 +17,7 @@ workButton.addEventListener("click", work);
 
 //work and spend all money to repay loan
 const repayLoanByWork = () => {
-  repayLoan(salary);
+  bankMod.repayLoan(salary);
 };
 repayLoanButton.addEventListener("click", repayLoanByWork);
 
@@ -41,15 +41,20 @@ const transferToBank = () => {
 
   //check if user have a loan, if so pay 10 percent to pay off loan and the rest is transferred to the account
   //obs, repay loan function have their own function to transfer money to bank account if it is more than owed
-  if (bankLoan > 0) {
-    bankBalance += parseInt(transferSum * 0.9);
-    repayLoan(transferSum * 0.1);
+  if (bankMod.getLoan > 0) {
+    bankMod.deposit(parseInt(transferSum * 0.9));
+    bankMod.repayLoan(transferSum * 0.1);
   } else {
-    bankBalance += parseInt(transferSum);
-    bankBalanceElement.innerText = bankBalance + "kr";
-  }
+    bankMod.deposit(parseInt(transferSum));
+    }
   //update wallet's value and and texts
   walletBalance -= parseInt(transferSum);
   walletBalanceElement.innerText = walletBalance + "kr";
 };
 transferToBankButton.addEventListener("click", transferToBank);
+
+export const workMod ={
+  work,
+  repayLoanByWork,
+  transferToBank
+}
